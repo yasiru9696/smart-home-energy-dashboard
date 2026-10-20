@@ -5,3 +5,113 @@
 @media(max-width:1250px){.sidebar{width:190px}.content{padding:20px 17px}.topbar{padding:0 18px;gap:15px}.dashboard-grid{grid-template-columns:minmax(0,1.5fr) minmax(270px,.8fr)}.metric-card{padding:12px 10px;gap:8px}.metric-icon{width:33px;height:33px}.metric-main>span{font-size:9px}.metric-value{font-size:22px}.house-scene{height:315px}.lower-grid{grid-template-columns:1fr}.flow-graphic{height:140px}.device-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:950px){.sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-105%);transition:transform .25s;box-shadow:20px 0 60px #0006}.sidebar.sidebar-open{transform:translateX(0)}.mobile-close{display:block;margin-left:auto;border:0;background:transparent;color:#9cb3c9}.menu-btn{display:grid;place-items:center;border:1px solid #203a51;background:#0b2033;border-radius:8px;width:34px;height:34px}.mobile-brand{display:flex;align-items:center;gap:7px;font:600 12px 'Space Grotesk';white-space:nowrap}.mobile-brand svg{color:#57c7ff}.topbar{height:65px;padding:0 14px}.weather{margin-left:8px}.location{display:none}.header-date span{font-size:8px}.profile span,.profile>svg{display:none}.profile{padding-left:10px}.content{padding:18px 14px}.dashboard-grid{grid-template-columns:minmax(0,1fr)}.right-column{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.right-column .events-panel,.right-column .integration-card{align-self:stretch}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.house-scene{height:390px}.lower-grid{grid-template-columns:1fr 1fr}.comparison-grid{gap:8px}.compare-item{padding:8px}.load-content{gap:0}.donut-wrap{width:40%}.device-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.topbar{gap:9px;height:59px}.mobile-brand{font-size:10px}.weather{gap:6px;margin-left:auto}.weather-icon{width:30px;height:30px;border-radius:9px}.weather-icon svg{width:19px}.weather b{font-size:14px}.weather small{font-size:8px}.header-date,.wifi{display:none}.profile{border-left:0;padding-left:0}.avatar{width:29px;height:29px}.content{padding:15px 10px}.page-heading{align-items:flex-start}.page-heading h1{font-size:21px}.page-heading p{max-width:230px;font-size:10px;line-height:1.5}.heading-actions{gap:5px}.heading-actions .icon-button{width:29px;height:30px}.date-select{height:30px;padding:0 7px;font-size:9px;gap:4px}.metric-grid{gap:8px;margin-bottom:10px}.metric-card{min-height:100px;padding:11px 8px;gap:7px;border-radius:10px}.metric-icon{width:29px;height:29px;border-radius:9px}.metric-icon svg{width:17px}.metric-main>span{font-size:8px}.metric-value{font-size:22px}.metric-value small{font-size:9px}.metric-detail,.metric-change{font-size:9px}.metric-change small{font-size:8px}.metric-spark{display:none}.dashboard-grid{gap:10px}.house-panel-head{padding:0 12px;height:57px}.house-panel-head h2{font-size:14px}.house-scene{height:285px}.house-illustration{width:68%;left:16%;top:20%;height:58%}.solar-label{left:3%;top:6%;padding:7px;font-size:8px}.solar-label b,.grid-label b{font-size:10px}.grid-label{right:3%;top:16%;padding:7px}.scene-label svg{width:17px}.hotspot-light{left:37%;top:51%}.hotspot-fan{left:25%;top:57%}.hotspot-water{left:47%;top:70%}.hotspot-car{right:7%;bottom:13%;font-size:8px}.scene-caption{font-size:8px;left:7px;bottom:7px;padding:6px}.scene-caption small{display:none}.house-footer{padding:0 9px}.house-footer>div{font-size:9px;gap:5px}.house-footer button{font-size:9px}.lower-grid{grid-template-columns:1fr;gap:10px}.panel{padding:12px}.flow-graphic{height:145px;grid-template-columns:68px 1fr 68px 80px}.flow-ribbons{gap:17px}.flow-legend{padding-top:8px}.chart{height:185px}.consumption-panel .chart{height:180px}.comparison-grid{grid-template-columns:1fr;gap:7px;margin-top:11px}.compare-item{padding:10px}.compare-item>b{font-size:15px;margin-top:4px}.compare-bars{margin-top:7px}.compare-foot{margin-top:6px}.right-column{grid-template-columns:1fr;gap:9px}.load-content{justify-content:space-around}.donut-wrap{width:42%;height:145px}.load-legend{gap:12px}.load-legend span{font-size:10px}.load-legend b{font-size:10px}.load-legend small{font-size:9px}.control-row{padding:8px 0}.quick-grid button{font-size:10px}.event-row span{font-size:10px}.integration-art{gap:14px}.page-footer{font-size:7px;flex-wrap:wrap}.device-grid{grid-template-columns:1fr}.device-toolbar{align-items:stretch;flex-direction:column}.search-box{max-width:none}.section-head h2,.panel h2{font-size:12px}.devices-page .section-head,.automation-page .section-head{align-items:flex-start}.primary-btn{padding:8px;font-size:9px}.analytics-page{grid-template-columns:1fr}.wide-chart{grid-column:auto}.wide-chart .chart{height:230px}.month-chart{height:220px}.settings-row{gap:8px;flex-wrap:wrap}.settings-row>div{min-width:140px}.settings-row .status-pill{order:2}.settings-row .outline-btn{margin-left:auto}.notice{font-size:9px}.modal{padding:16px}.heading-actions .icon-button:first-child{display:none}}
+
+
+/* Premium spatial scene polish — keeps the existing dashboard layout intact */
+.house-scene{
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 49% 61%,#16465b88 0,transparent 44%),
+    radial-gradient(ellipse at 50% 100%,#0e3048 0,transparent 62%),
+    linear-gradient(145deg,#071522 0%,#091b2b 52%,#061321 100%);
+}
+.house-scene:before{
+  background-image:
+    linear-gradient(30deg,transparent 49.6%,#4ca6c522 50%,transparent 50.5%),
+    linear-gradient(150deg,transparent 49.6%,#4ca6c51c 50%,transparent 50.5%);
+  background-size:88px 50px;
+  opacity:.42;
+}
+.scene-stars{opacity:.18;background-size:47px 51px}
+.house-ground{
+  background:
+    linear-gradient(135deg,#16434d 0%,#0d2b38 48%,#081c2a 100%);
+  border:1px solid #3b8a9b66;
+  box-shadow:0 0 0 1px #2ed8dc0b,0 22px 65px #0007,inset 0 0 45px #29d4d015;
+}
+.house-illustration{
+  filter:drop-shadow(0 26px 23px #000b) drop-shadow(0 0 16px #4cc9f018);
+}
+.roof-back{
+  background:linear-gradient(145deg,#62859a 0%,#294f68 45%,#102d43 100%);
+  filter:drop-shadow(0 7px 8px #0007);
+}
+.roof-main{
+  background:linear-gradient(145deg,#1c6390,#0a2a49 76%);
+  filter:drop-shadow(0 0 12px #249cff28);
+}
+.solar-tile{
+  background:linear-gradient(145deg,#4e9fd0 0%,#1d5a88 42%,#123657 100%);
+  border:1px solid #9cddff9c;
+  box-shadow:inset 1px 1px 0 #d4f3ff42,inset -2px -2px 5px #061b35a8,0 0 5px #4ba9f31a;
+}
+.house-body{
+  background:linear-gradient(125deg,#f0dfbd 0%,#b6a184 28%,#7f8e91 66%,#304f62 100%);
+  filter:drop-shadow(0 8px 7px #0006);
+  box-shadow:inset 0 0 0 1px #fff6,inset -14px -7px 22px #081b2b44;
+}
+.room{
+  box-shadow:inset 0 0 0 1px #fff6,inset 0 0 20px #fff4,0 5px 12px #0003;
+}
+.room span{
+  background:linear-gradient(135deg,#c4f3ff,#59c9f5 60%,#3398d3);
+  box-shadow:0 0 10px #65d8ff99,inset 0 0 5px #fff8;
+}
+.room-living span.window-lit{
+  background:linear-gradient(135deg,#fff2a7,#ffc95e);
+  box-shadow:0 0 16px #ffce5b;
+}
+.garage{
+  background:linear-gradient(145deg,#8096a3,#263f52 72%,#102a3b);
+  filter:drop-shadow(0 8px 7px #0005);
+}
+.car-shape{
+  background:linear-gradient(180deg,#f2fbff 0%,#a9d9ed 42%,#5a8da7 100%);
+  box-shadow:0 0 18px #70d8ff44,inset 0 2px 2px #fff;
+}
+.car-shape:before{
+  background:linear-gradient(145deg,#c6edfa,#5489a5);
+  box-shadow:inset 0 1px 2px #fff8;
+}
+.tree{
+  background:radial-gradient(circle at 28% 24%,#9ce69b 0,#4aab70 28%,#176144 67%,#0b3b32 100%);
+  box-shadow:inset -8px -5px 12px #062b21a8,0 8px 12px #0006,0 0 13px #4bd98b19;
+}
+.scene-label{
+  background:linear-gradient(145deg,#0b2134f5,#071522f2);
+  border-color:#4d7f9b88;
+  box-shadow:0 10px 24px #0005,inset 0 1px 0 #ffffff0c;
+  backdrop-filter:blur(10px);
+}
+.energy-lines{
+  filter:drop-shadow(0 0 4px #40d7f2) drop-shadow(0 0 9px #40d7f255);
+}
+.energy-lines path{
+  stroke-dasharray:9 7;
+  animation:energyFlow 2.6s linear infinite;
+}
+@keyframes energyFlow{to{stroke-dashoffset:-64}}
+.hotspot{
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 0 4px #4ccfff0b,0 0 18px #2ba9ff44,inset 0 1px 0 #ffffff20;
+  animation:hotspotFloat 4s ease-in-out infinite;
+}
+.hotspot-fan{animation-delay:-1.3s}
+.hotspot-water{animation-delay:-2.1s}
+.hotspot-car{animation-delay:-.7s}
+@keyframes hotspotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.scene-caption{
+  background:linear-gradient(100deg,#061321ed,#0a2030e8);
+  border-color:#2b5268;
+  box-shadow:0 8px 18px #0003;
+}
+@media (prefers-reduced-motion:reduce){
+  .energy-lines path,.hotspot{animation:none}
+}
+@media(max-width:700px){
+  .house-illustration{width:69%;left:15%;top:17%;height:62%}
+  .scene-label{padding:7px 9px;gap:6px}
+  .scene-label svg{width:18px;height:18px}
+  .solar-label{left:3%;top:7%}
+  .grid-label{right:3%;top:12%}
+}
