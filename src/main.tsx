@@ -39,35 +39,82 @@ const nav = [
 const fmt = (n:number) => n.toLocaleString('en-US',{maximumFractionDigits:1})
 function HouseScene({devices}:{devices:Device[]}) {
  const lights = devices.filter(d=>d.kind==='light'&&d.on).length
- return <div className="house-scene">
+ const fanOn = devices.some(d=>d.kind==='fan'&&d.on)
+ const pumpOn = devices.some(d=>d.kind==='pump'&&d.on)
+ return <div className="house-scene scene-redesign">
    <div className="scene-stars"></div>
-   <div className="scene-label solar-label"><Sun size={23}/><span>Solar <b>4.8 kW</b></span></div>
-   <div className="scene-label grid-label"><Zap size={22}/><span>Grid <b>2.1 kW</b></span></div>
-   <svg className="energy-lines" viewBox="0 0 800 390" preserveAspectRatio="none" aria-hidden="true">
-     <path d="M310 78 L420 140 L420 218 L560 275" stroke="#f6c74a" strokeWidth="3" fill="none" strokeLinecap="round"/>
-     <path d="M675 90 L590 130 L590 220 L560 275" stroke="#24e9d0" strokeWidth="3" fill="none" strokeLinecap="round"/>
-     <path d="M560 275 L630 315" stroke="#26a9ff" strokeWidth="3" fill="none" strokeLinecap="round"/>
+   <div className="scene-orbit scene-orbit-one"></div><div className="scene-orbit scene-orbit-two"></div>
+   <div className="scene-label solar-label"><Sun size={22}/><span>Solar <b>4.8 kW</b></span></div>
+   <div className="scene-label grid-label"><Zap size={21}/><span>Grid <b>2.1 kW</b></span></div>
+   <svg className="energy-lines" viewBox="0 0 900 430" preserveAspectRatio="none" aria-hidden="true">
+     <defs>
+       <linearGradient id="solarCable" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#ffe17b"/><stop offset="1" stopColor="#f5a623"/></linearGradient>
+       <linearGradient id="gridCable" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#6effe4"/><stop offset="1" stopColor="#13c8ca"/></linearGradient>
+       <linearGradient id="evCable" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#60c9ff"/><stop offset="1" stopColor="#168bff"/></linearGradient>
+     </defs>
+     <path d="M315 95 L408 150 L408 242 L574 327" stroke="url(#solarCable)" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+     <path d="M730 112 L645 151 L645 260 L574 327" stroke="url(#gridCable)" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+     <path d="M574 327 L680 365" stroke="url(#evCable)" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+     <circle cx="408" cy="242" r="5" fill="#ffd45e"/><circle cx="645" cy="260" r="5" fill="#46f4db"/>
    </svg>
-   <div className="house-ground"></div>
-   <div className="house-illustration">
-     <div className="roof-back"></div><div className="roof-main">
-       {Array.from({length:12},(_,i)=><span key={i} className="solar-tile"/>)}
-     </div>
-     <div className="house-body">
-       <div className="room room-living"><span className={lights?'window-lit':''}></span><i></i><em></em></div>
-       <div className="room room-bed"><span></span><i></i></div>
-       <div className="room room-kitchen"><span></span><i></i></div>
-       <div className="house-door"></div>
-       <div className="house-window"></div>
-     </div>
-     <div className="garage"><div className="car-shape"><span></span></div></div>
-     <div className="garden tree tree-a"></div><div className="garden tree tree-b"></div><div className="garden tree tree-c"></div>
-   </div>
-   <div className="hotspot hotspot-light"><Lightbulb size={18}/><span>{lights} lights on</span></div>
-   <div className="hotspot hotspot-fan"><Fan size={18}/></div>
-   <div className="hotspot hotspot-water"><Droplets size={18}/></div>
-   <div className="hotspot hotspot-car"><CarFront size={19}/><span>EV · 2.2 kW</span></div>
-   <div className="scene-caption"><span className="live-dot"></span> Smart Home <span>•</span> Live visualization <small>Illustrative 3D view</small></div>
+   <svg className="isometric-house" viewBox="0 0 900 430" role="img" aria-label="Illustrated isometric smart home with solar panels, rooms, garden and an electric vehicle">
+     <defs>
+       <linearGradient id="plotTop" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#173d4b"/><stop offset=".55" stopColor="#0d2a3a"/><stop offset="1" stopColor="#081a2a"/></linearGradient>
+       <linearGradient id="wallFront" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f0d9ad"/><stop offset=".5" stopColor="#b8a487"/><stop offset="1" stopColor="#887e70"/></linearGradient>
+       <linearGradient id="wallSide" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#a7b2b0"/><stop offset="1" stopColor="#526c7a"/></linearGradient>
+       <linearGradient id="roofTile" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#4da0d1"/><stop offset=".55" stopColor="#1c5a88"/><stop offset="1" stopColor="#103552"/></linearGradient>
+       <linearGradient id="windowGlow" x1="0" y1="0" x2="1" y2="1"><stop stopColor={lights ? "#fff2a3" : "#b7edff"}/><stop offset="1" stopColor={lights ? "#ffbd52" : "#4ba9d4"}/></linearGradient>
+       <linearGradient id="carPaint" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#f3fbff"/><stop offset=".5" stopColor="#a4d6ea"/><stop offset="1" stopColor="#4d819b"/></linearGradient>
+       <filter id="houseShadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="14" stdDeviation="12" floodColor="#000" floodOpacity=".38"/></filter>
+       <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+     </defs>
+     <ellipse cx="458" cy="333" rx="310" ry="47" fill="#000" opacity=".25" filter="url(#softGlow)"/>
+     <polygon points="95,285 430,150 810,285 470,411" fill="url(#plotTop)" stroke="#3b7888" strokeOpacity=".65" strokeWidth="1.5"/>
+     <path d="M135 286L470 410M205 259L540 384M275 231L610 359M345 203L680 333M415 176L750 307" stroke="#3e8793" strokeOpacity=".2" strokeWidth="1"/>
+     <path d="M210 330L548 195M310 367L648 232M410 400L748 267" stroke="#3e8793" strokeOpacity=".16" strokeWidth="1"/>
+     <g filter="url(#houseShadow)">
+       <polygon points="275,190 465,105 664,171 474,259" fill="#365b70" stroke="#9ab4bf" strokeWidth="2"/>
+       <polygon points="275,190 474,259 474,284 275,214" fill="#607d8c"/>
+       <polygon points="474,259 664,171 664,195 474,284" fill="#2d4e62"/>
+       <polygon points="300,190 465,120 638,177 474,249" fill="url(#roofTile)" stroke="#8ad2f5" strokeOpacity=".75" strokeWidth="1.4"/>
+       {Array.from({length:3},(_,i)=><path key={"pv-row-"+i} d={`M${321+i*5} ${199-i*24} L${493+i*48} ${255-i*24}`} stroke="#8dd8ff" strokeOpacity=".8" strokeWidth="1.5"/>)}
+       {Array.from({length:4},(_,i)=><path key={"pv-col-"+i} d={`M${343+i*42} ${172-i*17} L${516+i*31} ${229-i*17}`} stroke="#80c9f0" strokeOpacity=".8" strokeWidth="1.5"/>)}
+       <polygon points="326,222 474,274 474,355 326,303" fill="url(#wallFront)" stroke="#f3dfbc" strokeWidth="1.5"/>
+       <polygon points="474,274 633,203 633,285 474,355" fill="url(#wallSide)" stroke="#d2e1e2" strokeOpacity=".7" strokeWidth="1.5"/>
+       <polygon points="348,236 400,254 400,296 348,278" fill="url(#windowGlow)" stroke="#eaf7fa" strokeWidth="3"/>
+       <polygon points="414,260 457,275 457,313 414,298" fill="#314e60" stroke="#d4c5a9" strokeWidth="3"/>
+       <polygon points="495,283 535,265 535,301 495,320" fill="url(#windowGlow)" stroke="#d9f4ff" strokeWidth="3"/>
+       <polygon points="561,254 600,237 600,273 561,290" fill="#80d8f5" stroke="#d7f6ff" strokeWidth="3"/>
+       <path d="M326 303L474 355L633 285" fill="none" stroke="#f7e4c3" strokeWidth="3" strokeOpacity=".8"/>
+       <polygon points="410,173 465,149 516,166 461,191" fill="#285b7b" stroke="#7fc7eb" strokeWidth="1.5"/>
+       <polygon points="410,173 461,191 461,211 410,193" fill="#6e8995"/>
+       <polygon points="461,191 516,166 516,186 461,211" fill="#294b60"/>
+     </g>
+     <g>
+       <path d="M198 300L217 281L236 288L236 309L217 316Z" fill="#164a3c"/><ellipse cx="217" cy="281" rx="17" ry="22" fill="#2d9b68"/><ellipse cx="211" cy="275" rx="8" ry="12" fill="#75d68a" opacity=".7"/><path d="M217 300L217 321" stroke="#79583d" strokeWidth="6" strokeLinecap="round"/>
+       <path d="M690 294L704 281L719 286L719 304L704 311Z" fill="#164a3c"/><ellipse cx="704" cy="279" rx="14" ry="18" fill="#24885c"/><ellipse cx="699" cy="273" rx="6" ry="9" fill="#76d78b" opacity=".7"/><path d="M704 294L704 312" stroke="#79583d" strokeWidth="5" strokeLinecap="round"/>
+       <circle cx="270" cy="336" r="3" fill="#6cdbb1"/><circle cx="287" cy="343" r="2.5" fill="#f3cb61"/><circle cx="654" cy="325" r="3" fill="#6cdbb1"/>
+     </g>
+     <g>
+       <polygon points="579,329 666,294 758,325 671,362" fill="#253f50" stroke="#6c9aaf" strokeWidth="1.5"/>
+       <polygon points="603,326 659,304 713,322 659,345" fill="#193044" stroke="#60869a" strokeWidth="1"/>
+       <path d="M610 329L621 316Q627 310 640 310L677 313Q687 314 697 324L708 328L711 337L605 344Z" fill="url(#carPaint)" stroke="#bfeafa" strokeWidth="1.5"/>
+       <path d="M636 313L649 307L674 311L687 321L637 321Z" fill="#3b6d83" stroke="#a5dff2" strokeWidth="1.2"/>
+       <path d="M653 309L654 320M674 311L682 321" stroke="#a8dff0" strokeWidth="1.3"/>
+       <ellipse cx="626" cy="343" rx="10" ry="6" fill="#08131e"/><ellipse cx="691" cy="337" rx="10" ry="6" fill="#08131e"/>
+       <ellipse cx="626" cy="342" rx="4" ry="2.5" fill="#8faab6"/><ellipse cx="691" cy="336" rx="4" ry="2.5" fill="#8faab6"/>
+     </g>
+     <g>
+       <circle cx="374" cy="315" r="15" fill={lights ? "#f7c957" : "#15384b"} fillOpacity=".25"/><circle cx="374" cy="315" r="6" fill={lights ? "#ffd56a" : "#8bb7c7"}/>
+       <circle cx="548" cy="279" r="12" fill={fanOn ? "#4ce0c2" : "#193d4c"} fillOpacity=".3"/><circle cx="548" cy="279" r="4" fill={fanOn ? "#4ce0c2" : "#6d98a8"}/>
+       <circle cx="454" cy="337" r="11" fill={pumpOn ? "#49d5ef" : "#1a4054"} fillOpacity=".35"/><circle cx="454" cy="337" r="4" fill={pumpOn ? "#49d5ef" : "#6d98a8"}/>
+     </g>
+   </svg>
+   <div className="hotspot hotspot-light"><Lightbulb size={17}/><span>{lights} lights on</span></div>
+   <div className="hotspot hotspot-fan"><Fan size={17}/></div>
+   <div className="hotspot hotspot-water"><Droplets size={17}/></div>
+   <div className="hotspot hotspot-car"><CarFront size={18}/><span>EV · 2.2 kW</span></div>
+   <div className="scene-caption"><span className="live-dot"></span> Smart Home <span>•</span> 3D concept view <small>Illustrative model</small></div>
  </div>
 }
 function App(){
